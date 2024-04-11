@@ -1,6 +1,6 @@
 import { traceMethod } from './tracer';
 
-export class DiceRollingService {
+export class ApplicationService {
   constructor() {}
 
   @traceMethod()

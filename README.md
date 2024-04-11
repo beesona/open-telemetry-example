@@ -7,6 +7,34 @@
 
 - use the command `npx ts-node --require ./src/instrumentation.ts ./src/index.ts`
 
+## Custom Telemetry via decorators
+
+This app uses function decorators to tell Open-Telemetry we want to trace function calls using active spans. Here's an example of how to tell Open-Telemetry to include a function as part of the nested spans activated with an HTTP request:
+
+```
+  @traceMethod() // This is the magic part 🧙‍♂️
+  getRequest(id: string): HttpResponse {
+    const response: HttpResponse = {
+      responseCode: '200',
+      responseBody: undefined,
+      responseHeaders: [],
+    };
+    if (id) {
+      const item = this.businessLogicService.getRecord(id);
+      if (!item) {
+        response.responseCode = '404';
+      } else {
+        response.responseBody = item;
+      }
+    } else {
+      response.responseCode = '400';
+    }
+    return response;
+  }
+```
+
+And that's it! The function has been added to the active spans of the request trace telemetry!
+
 ## Exploring Trace Telemetry
 
 When a request comes into the Express server, instrumentation, Express and Custom, begin tracing the request. The following is an example of POST request telemetry. Note some of the following data:

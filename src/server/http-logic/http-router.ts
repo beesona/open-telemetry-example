@@ -8,7 +8,10 @@ export class HttpRouter<T> {
 
     constructor(service: BusinessLogic<T>) {
         this.businessLogicService = service;
+        this.bindRoutes();
+    }
 
+    private bindRoutes() {
         this.router.get('/:id', (req, res) => {
             const id = req.url.split('/')[1];
             const result = this.getRequest(id);

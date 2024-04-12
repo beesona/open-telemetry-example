@@ -14,8 +14,8 @@ const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-expre
 
 const sdk = new NodeSDK({
     resource: new Resource({
-        [SEMRESATTRS_SERVICE_NAME]: "Adam's Service",
-        [SEMRESATTRS_SERVICE_VERSION]: '1.0'
+        [SEMRESATTRS_SERVICE_NAME]: 'Open-Telemetry-Example',
+        [SEMRESATTRS_SERVICE_VERSION]: '0.1.0'
     }),
     traceExporter: new ConsoleSpanExporter(),
     instrumentations: [new HttpInstrumentation(), new ExpressInstrumentation()],

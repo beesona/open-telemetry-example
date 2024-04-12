@@ -194,7 +194,11 @@ Then compare this trace to the next call, which is a GET request:
 
 ## Tracing Requests over remote resources
 
-The latest version of this application now has a client and server app. The client is a simple HTTP GET request, and the server is the original application logic. Requests using the HTTP instrumentation will pass trace info over HTTP and the remote resource will use it to continue the trace. Here is an Example:
+The latest version of this application now has a client and server app. The client is a simple HTTP GET request, and the server is the original application logic. Requests using the HTTP instrumentation will pass trace info over HTTP and the remote resource will use it to continue the trace.
+
+-   To get this working, simply start the server app (`npm run start:server`), then start the client in a separate terminal (`npm run start:client`). Monitor both consoles to view the telemetry (A future version of this example will include a telemetry collector and display).
+
+Here is an Example of the output:
 
 ### The Client Trace
 

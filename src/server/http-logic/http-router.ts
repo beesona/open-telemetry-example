@@ -2,7 +2,7 @@ import express from 'express';
 import { BusinessLogic, HttpRequest, HttpResponse } from '../types/types';
 import { traceMethod } from '../../tracer';
 
-export class HttpRouter<T> {
+export class HttpRouter<T> implements HttpRouter<T> {
     router = express.Router();
     businessLogicService: BusinessLogic<T>;
 

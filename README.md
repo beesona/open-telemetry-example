@@ -7,11 +7,11 @@
 
 ### Server
 
--   use the command `npx ts-node --require ./src/instrumentation.ts ./src/server/index.ts`
+-   use the command `npm run start:server`
 
 ### Client
 
--   use the command `npx ts-node --require ./src/instrumentation.ts ./src/client/index.ts`
+-   use the command `npm run start:client`
 
 ## Custom Telemetry via decorators
 

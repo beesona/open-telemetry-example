@@ -16,11 +16,9 @@ interface HttpResponse {
     responseBody?: any;
 }
 
-interface HttpRouter<T> {
+interface IHttpRouter<T> {
     router: Router;
     businessLogicService: BusinessLogic<T>;
-
-    bindRoutes(): void;
     postRequest(req: HttpRequest): HttpResponse;
     getRequest(id: string): HttpResponse;
 }
@@ -42,4 +40,4 @@ interface BusinessObject {
     value: string;
 }
 
-export { HttpRequest, HttpResponse, HttpController, BusinessLogic, BusinessObject };
+export { HttpRequest, HttpResponse, HttpController, BusinessLogic, BusinessObject, IHttpRouter };

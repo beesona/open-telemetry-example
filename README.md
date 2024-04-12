@@ -1,7 +1,15 @@
 # Open Telemetry Example
 
--   Uses an Express Instrumentation.
+-   Uses an Express Instrumentation to capture request events.
 -   Implements custom trace spans with experimental decorators.
+-   Uses HTTP instrumentation to trace across client and remote processes.
+
+##### Table of Contents
+
+[Running the app(s)](#to-run-this-with-open-telemetry-bootstrapped)  
+[Decorator Example](#custom-telemetry-via-decorators)  
+[Exploring Trace Telemetry](#exploring-trace-telemetry)  
+[Traces Over Remote Resources](#tracing-requests-over-remote-resources)
 
 ## To run this with Open-Telemetry bootstrapped
 

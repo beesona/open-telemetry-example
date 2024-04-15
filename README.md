@@ -308,3 +308,18 @@ Here is an Example of the output:
   links: []
 }]
 ```
+
+## Spin up a Database for Sequelize Tracing
+
+- A SQL script for creating some sample data is included in ./src/database/create-database.sql
+- Using docker, run the following command to spin up a local mySQL DB for testing.
+
+```
+docker container run \
+  --name business_database \
+  --publish 3306:3306 \
+  --env MYSQL_ROOT_PASSWORD=replace_me \
+  --volume ./src/database/create-database.sql:/docker-entrypoint-initdb.d/dump.sql \
+  --detach \
+  mysql:latest
+```

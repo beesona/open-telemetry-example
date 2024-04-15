@@ -1,26 +1,21 @@
 import { traceMethod } from '../../tracer';
-import { BusinessLogic, BusinessObject } from '../types/types';
+import { BusinessLogic, BusinessObject, IDataAdapter } from '../types/types';
 
 export class BusinessService implements BusinessLogic<BusinessObject> {
-    objectStore: BusinessObject[] = [];
+  dataAdapter: IDataAdapter;
+  constructor(dataAdapter: IDataAdapter) {
+    this.dataAdapter = dataAdapter;
+  }
 
-    constructor() {
-        this.seedStore();
-    }
+  @traceMethod()
+  async createRecord(record: BusinessObject): Promise<BusinessObject> {
+    await this.dataAdapter.createRecord(record.id, record.value);
+    return record;
+  }
 
-    @traceMethod()
-    createRecord(record: BusinessObject): BusinessObject {
-        this.objectStore.push(record);
-        return record;
-    }
-
-    @traceMethod()
-    getRecord(key: string): BusinessObject | undefined {
-        return this.objectStore.find((r) => r.id === key);
-    }
-
-    seedStore() {
-        this.createRecord({ id: '1', value: 'First' });
-        this.createRecord({ id: '2', value: 'Second' });
-    }
+  @traceMethod()
+  async getRecord(key: string): Promise<BusinessObject | undefined> {
+    const result = await this.dataAdapter.getRecord(key);
+    return { id: result.data.id, value: result.data.value };
+  }
 }

@@ -21,14 +21,25 @@ interface HttpController<T> {
 }
 
 interface BusinessLogic<T> {
-  objectStore: T[];
-  createRecord(obj: T): T;
-  getRecord(key: string): T | undefined;
+  createRecord(obj: T): Promise<T>;
+  getRecord(key: string): Promise<T | undefined>;
 }
 
 interface BusinessObject {
   id: string;
   value: string;
+}
+
+interface IDatabaseResponse<T> {
+  data: T;
+}
+
+interface IDataAdapter {
+  createRecord(
+    id: string,
+    value: string
+  ): Promise<IDatabaseResponse<BusinessObject>>;
+  getRecord(id: string): Promise<IDatabaseResponse<BusinessObject>>;
 }
 
 export {
@@ -37,4 +48,6 @@ export {
   HttpController,
   BusinessLogic,
   BusinessObject,
+  IDatabaseResponse,
+  IDataAdapter,
 };

@@ -1,12 +1,16 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import { BusinessObject, IDatabaseResponse } from '../types/types';
+import {
+  BusinessObject,
+  IDataAdapter,
+  IDatabaseResponse,
+} from '../types/types';
 import { traceMethod } from '../../tracer';
 
 /**
  * This whole class needs some refactor to more loosely couple the adapter
  * with the data types. The adapter should be able to handle any data type.
  */
-export class MysqlDatabaseAdapter {
+export class MysqlDatabaseAdapter implements IDataAdapter {
   sequelize: any;
   model: any;
 
@@ -59,7 +63,7 @@ export class MysqlDatabaseAdapter {
   }
 
   @traceMethod()
-  async createRecord(
+  async createData(
     id: string,
     value: string
   ): Promise<IDatabaseResponse<BusinessObject>> {
@@ -71,7 +75,7 @@ export class MysqlDatabaseAdapter {
   }
 
   @traceMethod()
-  async getRecord<BusinessObject>(
+  async getData<BusinessObject>(
     id: string
   ): Promise<IDatabaseResponse<BusinessObject>> {
     const result = this.model.findAll({ where: { businessId: id } });

@@ -44,11 +44,11 @@ interface IDatabaseResponse<T> {
 }
 
 interface IDataAdapter {
-  createRecord(
+  createData(
     id: string,
     value: string
   ): Promise<IDatabaseResponse<BusinessObject>>;
-  getRecord(id: string): Promise<IDatabaseResponse<BusinessObject>>;
+  getData(id: string): Promise<IDatabaseResponse<BusinessObject>>;
 }
 
 export {

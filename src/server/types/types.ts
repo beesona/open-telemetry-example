@@ -19,8 +19,8 @@ interface HttpResponse {
 interface IHttpRouter<T> {
   router: Router;
   businessLogicService: BusinessLogic<T>;
-  postRequest(req: HttpRequest): HttpResponse;
-  getRequest(id: string): HttpResponse;
+  postRequest(req: HttpRequest): Promise<HttpResponse>;
+  getRequest(id: string): Promise<HttpResponse>;
 }
 
 interface HttpController<T> {
@@ -36,7 +36,15 @@ interface BusinessLogic<T> {
 
 interface BusinessObject {
   id: string;
-  value: string;
+  businessId: string;
+  businessValue: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+interface NewBusinessObject {
+  businessId: string;
+  businessValue: string;
 }
 
 interface IDatabaseResponse<T> {
@@ -44,11 +52,8 @@ interface IDatabaseResponse<T> {
 }
 
 interface IDataAdapter {
-  createData(
-    id: string,
-    value: string
-  ): Promise<IDatabaseResponse<BusinessObject>>;
-  getData(id: string): Promise<IDatabaseResponse<BusinessObject>>;
+  createData<T>(id: string, value: T): Promise<IDatabaseResponse<T>>;
+  getData<T>(id: string): Promise<IDatabaseResponse<T> | undefined>;
 }
 
 export {
@@ -59,5 +64,5 @@ export {
   BusinessLogic,
   BusinessObject,
   IDatabaseResponse,
-  IDataAdapter,
+  IDataAdapter
 };
